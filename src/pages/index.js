@@ -18,8 +18,13 @@ export default function Home() {
       ? url.slice(firstIndex + firstPattern.length, url.length)
       : url.slice(secondIndex + secondPattern.length, url.length);
 
+  const cleanedYouTubeId = youTubeId.slice(
+    0,
+    youTubeId.indexOf('&') === -1 ? youTubeId.length : youTubeId.indexOf('&')
+  );
+
   const embedUrlPrefix = 'https://www.youtube.com/embed/';
-  const embed = `${embedUrlPrefix}${youTubeId}`;
+  const embed = `${embedUrlPrefix}${cleanedYouTubeId}`;
 
   const [copied, setCopied] = useState(false);
 
@@ -71,7 +76,7 @@ export default function Home() {
                   <div className="mt-1 rounded-md shadow-sm">
                     <div className="px-3 py-2 overflow-x-scroll border border-gray-300 rounded-md select-all sm:text-sm sm:leading-5">
                       <span className="text-gray-500">{embedUrlPrefix}</span>
-                      <span className="text-teal-600">{youTubeId}</span>
+                      <span className="text-teal-600">{cleanedYouTubeId}</span>
                     </div>
                   </div>
                 </div>
