@@ -65,7 +65,7 @@ export default function Home() {
                       type="text"
                       placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                       onChange={(e) => setUrl(e.target.value)}
-                      className="block w-full transition duration-150 ease-in-out border-gray-300 form-input sm:leading-5"
+                      className="block w-full transition duration-150 ease-in-out border-gray-300 form-input sm:text-sm sm:leading-5"
                     />
                   </div>
                 </label>
