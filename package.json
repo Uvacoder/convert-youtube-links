@@ -5,11 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
+    "autoprefixer": "^9.8.6",
     "next": "9.5.2",
+    "postcss": "^7.0.32",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-copy-to-clipboard": "^5.0.2",
+    "react-dom": "16.13.1",
+    "tailwindcss": "^1.7.3"
   }
 }
