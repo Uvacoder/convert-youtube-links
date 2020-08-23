@@ -28,6 +28,11 @@ export default function Home() {
 
   const [copied, setCopied] = useState(false);
 
+  function handleCopy() {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Head>
@@ -70,8 +75,7 @@ export default function Home() {
                   </div>
                 </label>
               </div>
-              <CopyToClipboard text={embed} onCopy={() => setCopied(true)}>
-                <div className="text-sm font-medium leading-5 text-gray-700 cursor-pointer focus:outline-none">
+              <CopyToClipboard text={embed} onCopy={handleCopy}>
                   <div className="flex items-center space-x-1">Embed URL</div>
                   <div className="mt-1 rounded-md shadow-sm">
                     <div className="px-3 py-2 overflow-x-scroll border border-gray-300 rounded-md select-all sm:text-sm sm:leading-5">
@@ -82,7 +86,7 @@ export default function Home() {
                 </div>
               </CopyToClipboard>
               <div>
-                <CopyToClipboard text={embed} onCopy={() => setCopied(true)}>
+                <CopyToClipboard text={embed} onCopy={handleCopy}>
                   <span className="block w-full rounded-md shadow-sm">
                     <button
                       type="button"
