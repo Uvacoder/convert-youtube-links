@@ -29,14 +29,14 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Head>
         <title>YouTube link converter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex-1">
-        <div className="flex flex-col justify-center py-24 bg-gray-50 sm:px-6 lg:px-8">
+        <div className="flex flex-col justify-center py-24 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md">
             <a
               href="https://www.lukebennett.com.au/"
