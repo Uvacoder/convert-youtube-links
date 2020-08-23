@@ -105,7 +105,7 @@ export default function Home() {
                     aria-hidden={false}
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                     tabIndex={0}
-                    title=""
+                    title="YouTube video"
                     className="absolute inset-0 w-full h-full"
                   />
                 </div>
