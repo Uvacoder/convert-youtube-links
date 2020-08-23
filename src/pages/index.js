@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { Logo, Footer } from '../components';
 
@@ -33,6 +32,30 @@ export default function Home() {
     setTimeout(() => setCopied(false), 3000);
   }
 
+  function copyToClipboard() {
+    if (document !== 'undefined') {
+      const el = document.createElement('textarea'); // Create a <textarea> element
+      el.value = `${embedUrlPrefix}${cleanedYouTubeId}`; // Set its value to the string that you want copied
+      el.setAttribute('readonly', ''); // Make it readonly to be tamper-proof
+      el.style.position = 'absolute';
+      el.style.left = '-9999px'; // Move outside the screen to make it invisible
+      document.body.appendChild(el); // Append the <textarea> element to the HTML document
+      const selected =
+        document.getSelection().rangeCount > 0 // Check if there is any content selected previously
+          ? document.getSelection().getRangeAt(0) // Store selection if found
+          : false; // Mark as false to know no selection existed before
+      el.select(); // Select the <textarea> content
+      document.execCommand('copy'); // Copy - only works as a result of a user action (e.g. click events)
+      document.body.removeChild(el); // Remove the <textarea> element
+      if (selected) {
+        // If a selection existed before copying
+        document.getSelection().removeAllRanges(); // Unselect everything on the HTML document
+        document.getSelection().addRange(selected); // Restore the original selection
+      }
+      handleCopy();
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Head>
@@ -60,42 +83,84 @@ export default function Home() {
             <div className="w-full max-w-md px-4 py-8 ml-auto space-y-6 bg-white shadow sm:rounded-lg sm:px-10">
               <div>
                 <label
-                  htmlFor="url"
+                  htmlFor="youtube_url"
                   className="block text-sm font-medium leading-5 text-gray-700"
                 >
                   YouTube URL
                   <div className="mt-1 rounded-md shadow-sm">
                     <input
-                      id="url"
+                      id="youtube_url"
                       type="text"
                       placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                       onChange={(e) => setUrl(e.target.value)}
-                      className="block w-full transition duration-150 ease-in-out border-gray-300 form-input sm:text-sm sm:leading-5"
+                      className="block w-full truncate transition duration-150 ease-in-out border-gray-300 form-input sm:text-sm sm:leading-5"
                     />
                   </div>
                 </label>
               </div>
-              <CopyToClipboard text={embed} onCopy={handleCopy}>
+
+              <div>
+                <label
+                  htmlFor="embed_url"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   <div className="flex items-center space-x-1">Embed URL</div>
                   <div className="mt-1 rounded-md shadow-sm">
-                    <div className="px-3 py-2 overflow-x-scroll border border-gray-300 rounded-md select-all sm:text-sm sm:leading-5">
-                      <span className="text-gray-500">{embedUrlPrefix}</span>
-                      <span className="text-teal-600">{cleanedYouTubeId}</span>
-                    </div>
+                    <input
+                      id="embed_url"
+                      type="text"
+                      onClick={copyToClipboard}
+                      value={`${embedUrlPrefix}${cleanedYouTubeId}`}
+                      className="block w-full truncate transition duration-150 ease-in-out bg-white border-gray-300 form-input sm:text-sm sm:leading-5"
+                    />
                   </div>
-                </div>
-              </CopyToClipboard>
+                </label>
+              </div>
+
               <div>
-                <CopyToClipboard text={embed} onCopy={handleCopy}>
-                  <span className="block w-full rounded-md shadow-sm">
-                    <button
-                      type="button"
-                      className="flex items-center justify-center w-full px-4 py-2 space-x-1 text-sm font-medium text-white transition duration-150 ease-in-out bg-teal-600 border border-transparent rounded-md hover:bg-teal-500 focus:outline-none focus:border-teal-700 focus:shadow-outline-teal active:bg-teal-700"
-                    >
-                      {copied ? 'Copied' : 'Get link'}
-                    </button>
-                  </span>
-                </CopyToClipboard>
+                <span className="block w-full rounded-md shadow-sm">
+                  <button
+                    type="button"
+                    onClick={copyToClipboard}
+                    className="flex items-center justify-center w-full px-4 py-2 space-x-1 text-sm font-medium text-white transition duration-150 ease-in-out bg-teal-600 border border-transparent rounded-md hover:bg-teal-500 focus:outline-none focus:border-teal-700 focus:shadow-outline active:bg-teal-700"
+                  >
+                    {copied ? (
+                      <>
+                        <span>Copied</span>
+                        <svg
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          className="w-4 h-4 check-circle"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        <span>Get link</span>
+                        <svg
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+                </span>
               </div>
             </div>
             <div className="w-full max-w-md overflow-hidden lg:max-w-lg sm:rounded-lg">
