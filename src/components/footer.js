@@ -4,7 +4,7 @@ function Footer() {
       <div className="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center md:order-2">
           <a
-            href="https://twitter.com/luke_bennett_"
+            href="https://twitter.com/AlecCam43544378"
             className="ml-6 text-gray-400 transition duration-150 ease-in-out hover:text-gray-500"
           >
             <span className="sr-only">Twitter</span>
@@ -13,7 +13,7 @@ function Footer() {
             </svg>
           </a>
           <a
-            href="https://github.com/lukebennett88"
+            href="https://github.com/uvacoder"
             className="ml-6 text-gray-400 transition duration-150 ease-in-out hover:text-gray-500"
           >
             <span className="sr-only">GitHub</span>
@@ -28,7 +28,7 @@ function Footer() {
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
           <p className="text-base leading-6 text-center text-gray-500">
-            © {new Date().getFullYear()} Luke Bennett. All rights reserved.
+            © {new Date().getFullYear()} uvacoder. All rights reserved.
           </p>
         </div>
       </div>
